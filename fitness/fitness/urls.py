@@ -1,0 +1,50 @@
+"""
+URL configuration for fitness project.
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from .import views,trainer_views,customer_views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('base/', views.BASE, name='base'),
+    path('', views.LOGIN, name='login'),
+    path('doLogin/', views.doLogin, name='doLogin'),
+    path('trainer/home/', trainer_views.HOME, name='admin_home'),
+    path('doLogout/', views.doLogout, name='logout'),
+    path('profile/', views.PROFILE, name='profile'),
+    path('profile/update', views.PROFILE_UPDATE, name='profile_update'),
+    path('trainer/customer/add', trainer_views.ADD_CUSTOMER, name='add_customer'),
+    path('trainer/customer/view', trainer_views.VIEW_CUSTOMER, name='view_customer'), 
+    path('trainer/customer/edit/<str:id>', trainer_views.EDIT_CUSTOMER, name='edit_customer'),
+    path('trainer/customer/update', trainer_views.UPDATE_CUSTOMER, name='update_customer'),
+    path('trainer/customer/delete/<str:admin>', trainer_views.DELETE_CUSTOMER, name='delete_customer'),
+    
+    path('trainer/activity/add', trainer_views.ADD_ACTIVITY, name='add_activity'),
+    path('trainer/activity/view', trainer_views.VIEW_ACTIVITY, name='view_activity'),
+    path('trainer/activity/edit/<str:id>', trainer_views.EDIT_ACTIVITY, name='edit_activity'),
+    path('trainer/activity/update', trainer_views.UPDATE_ACTIVITY, name='update_activity'),
+    path('trainer/activity/delete/<str:id>', trainer_views.DELETE_ACTIVITY, name='delete_activity'),
+    
+    path('trainer/add', trainer_views.ADD_TRAINER, name='add_trainer'),
+    path('trainer/view', trainer_views.VIEW_TRAINER, name='view_trainer'),
+    path('trainer/edit/<str:id>', trainer_views.EDIT_TRAINER, name='edit_trainer'),
+    path('trainer/update', trainer_views.UPDATE_TRAINER, name='update_trainer'),
+    path('trainer/delete/<str:id>', trainer_views.DELETE_TRAINER, name='delete_trainer'),
+        
+] + static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

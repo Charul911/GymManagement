@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+             <form method="post" action="{% url 'update_activity' %}">
+                {% csrf_token %}
+                   <div class="col-12">
+                      <h5 class="form-title"><span>Update Activity</span></h5>
+                   </div>
+                   {% include 'includes/messages.html' %}
+                   <div class="col-sm-11">
+                      <div class="form-group">
+                         <label>Enter Activity</label>
+                         <input type="text" class="form-control" name="name" value="{{activity.name}}" required>
+                         <input type="text" class="form-control" name="activity_id" value="{{activity.id}}" hidden>
+                      </div>
+                   </div>
+                   <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Update Activity</button>
+                   </div>
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+
+{% endblock %}
